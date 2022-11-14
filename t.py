@@ -15,12 +15,14 @@ def jira_connect() -> JIRA:
 
 def main() -> None:
     jira = jira_connect()
+    names_map = {field["name"]: field["id"] for field in jira.fields()}
 
-    issue = jira.issue("VIN-5")
+    issue = jira.issue("EIPP-245")
     print(issue.fields.project.key)
     print(issue.fields.issuetype.name)
     print(issue.fields.reporter.displayName)
     print(issue.fields.summary)
+    print(getattr(issue.fields, names_map["BN Feature Grouping"]))
 
 
 if __name__ == "__main__":
