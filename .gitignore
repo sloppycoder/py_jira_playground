@@ -27,3 +27,4 @@ cdk.out
 
 # custom
 env_*
+*.log
