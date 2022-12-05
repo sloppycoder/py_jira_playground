@@ -1,8 +1,8 @@
 import os
-from configparser import ConfigParser
 from fnmatch import fnmatch
 
 import requests
+from dotenv import load_dotenv
 from gitlab import Gitlab, GitlabAuthenticationError, GitlabGetError
 
 requests.packages.urllib3.disable_warnings()
@@ -28,4 +28,5 @@ def print_all_repos():
 
 
 if __name__ == "__main__":
+    load_dotenv()
     print_all_repos()
