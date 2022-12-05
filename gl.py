@@ -23,7 +23,8 @@ def enumerate_gitlab_projects(url, group, xfilter, ssl_verify=False):
 
 
 def print_all_repos():
-    for repo in enumerate_gitlab_projects("https://gitlab.com", "mobilityaccelerator", "*"):
+    url, group, xfilter = "https://gitlab.com", "mobilityaccelerator", "*"
+    for repo in enumerate_gitlab_projects(url, group, xfilter):
         print(repo.ssh_url_to_repo)
 
 
