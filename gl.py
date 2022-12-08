@@ -27,21 +27,14 @@ def enumerate_gitlab_projects(url, group, xfilter, ssl_verify=False):
     return []
 
 
-def print_comment(comment):
-    if platform.system() == "Windows":
-        print(f"@REM {comment}")
-    else:
-        print(f"# {comment}")
-
-
 def mkdir_cmd():
-    return "md " if platform.system() == "Windows" else "mkdir -p"
+    return "mkdir -Force " if platform.system() == "Windows" else "mkdir -p"
 
 
 def clone_script(parent_path, repo, clone_url):
     base_path = os.environ.get("LOCAL_BASE_PATH")
     output_path = f"{base_path}/{parent_path}"
-    print_comment(f"{clone_url}")
+    print(f"# {clone_url}")
 
     if os.path.isdir(f"{output_path}/{repo}/.git"):
         print(f"cd {output_path}/{repo}")
