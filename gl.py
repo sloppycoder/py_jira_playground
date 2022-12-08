@@ -37,12 +37,14 @@ def clone_script(parent_path, repo, clone_url):
     print(f"# {clone_url}")
 
     if os.path.isdir(f"{output_path}/{repo}/.git"):
+        print(f'echo "existing: {output_path}/{repo}"')
         print(f"cd {output_path}/{repo}")
         print("git remote prune origin")
         print("git fetch")
         print("git pull")
         print("\n")
     else:
+        print(f'echo "new: {output_path}/{repo}"')
         print(f"{mkdir_cmd()} {output_path}")
         print(f"cd {output_path}")
         print(f"git clone {clone_url}")
@@ -50,8 +52,9 @@ def clone_script(parent_path, repo, clone_url):
 
 
 def print_all_repos():
-    url, group, xfilter = "https://gitlab.com", "mobilityaccelerator", "*"
-    for repo in enumerate_gitlab_projects(url, group, xfilter)[:2]:
+    # url, group, xfilter = "https://gitlab.com", "mobilityaccelerator", "*"
+    url, group, xfilter = "https://gitlab-channel.devcloud.krungthai/", "EIPP", "eipp/backend/*"
+    for repo in enumerate_gitlab_projects(url, group, xfilter):
         parent_path = "/".join(repo.path_with_namespace.split("/")[:-1])
         clone_script(parent_path, repo.name, repo.ssh_url_to_repo)
 
