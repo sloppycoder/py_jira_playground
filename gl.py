@@ -57,9 +57,8 @@ def print_clone_all_script(url, group, token, local_base_path, xfilter="*", stri
 
         repo_path = repo.path_with_namespace
         if repo_path.find(strip_prefix) == 0:
-            parent_path = repo_path[len(strip_prefix) + 1 :]
-        else:
-            parent_path = repo_path
+            repo_path = repo_path[len(strip_prefix) + 1 :]
+        parent_path = "/".join(repo_path.split("/")[:-1])
 
         clone_script(local_base_path, parent_path, repo.name, repo.ssh_url_to_repo)
 
